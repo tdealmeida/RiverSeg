@@ -1,3 +1,21 @@
 project:
   type: website
-output_dir: docs
+  output-dir: docs
+
+website:
+  title: "Mapd'O"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Accueil
+
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: [cosmo, theme-dark.scss]
+    css: styles.css
+    toc: true
+
+editor: visual
