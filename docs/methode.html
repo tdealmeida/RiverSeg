@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mapd’O - index</title>
+<title>Mapd’O - méthode de segmentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,8 +84,16 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./methode.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Méthode de segmentation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./méthodo.qmd" rel="" target="">
+ <span class="menu-text">Méthologie</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -100,14 +108,27 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#beast" id="toc-beast" class="nav-link active" data-scroll-target="#beast">BEAST</a></li>
+  <li><a href="#binary-segmentation" id="toc-binary-segmentation" class="nav-link" data-scroll-target="#binary-segmentation">BINARY SEGMENTATION</a></li>
+  <li><a href="#pelt" id="toc-pelt" class="nav-link" data-scroll-target="#pelt">PELT</a></li>
+  <li><a href="#segment-neighbourhood" id="toc-segment-neighbourhood" class="nav-link" data-scroll-target="#segment-neighbourhood">SEGMENT Neighbourhood</a></li>
+  <li><a href="#pettitt" id="toc-pettitt" class="nav-link" data-scroll-target="#pettitt">PETTITT</a></li>
+  <li><a href="#hubert" id="toc-hubert" class="nav-link" data-scroll-target="#hubert">HUBERT</a></li>
+  <li><a href="#cumseg" id="toc-cumseg" class="nav-link" data-scroll-target="#cumseg">CumSeg</a></li>
+  <li><a href="#cpm" id="toc-cpm" class="nav-link" data-scroll-target="#cpm">CPM</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">index</h1>
+<h1 class="title">méthode de segmentation</h1>
 </div>
 
 
@@ -122,11 +143,42 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>L’application RiverSeg regroupe l’ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L’application permet d’harmoniser les résultats des différentes méthodes et de les spatialiser.</p>
-<p>L’application a été développé dans le cadre de ma thèse au sein du projet [<a href="https://evs-gis.github.io/mapdowebsite/">MapdO</a>](<a href="https://evs-gis.github.io/mapdowebsite/" class="uri">https://evs-gis.github.io/mapdowebsite/</a>)</p>
-<p><strong>Contact</strong> : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - <a href="mailto:lise.vaudor@ens-lyon.fr">lise.vaudor@ens-lyon.fr</a></p>
+<p>De nombreuses méthodes sont implémentés dans l’application afin de comparer les méthodes selon la distribution des données et des objectifs de la segmentation.</p>
+<p>Certaines méthodes ont été évalués dans un comparatif sur des données simulées (De Almeida et al., in press).</p>
+<section id="beast" class="level2">
+<h2 class="anchored" data-anchor-id="beast">BEAST</h2>
+<p>BEAST (Bayesian Estimator of Abrupt Change, Seasonal Change, and Trend) is an algorithm designed to detect abrupt change points in time series data, as well as to capture underlying trends and seasonal cycles (Zhao et al., 2019). See Rbeast package</p>
+</section>
+<section id="binary-segmentation" class="level2">
+<h2 class="anchored" data-anchor-id="binary-segmentation">BINARY SEGMENTATION</h2>
+<p>Binary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott &amp; Knott, 1974 ; Sen &amp; Srivastava, 1975). See changepoint package</p>
+</section>
+<section id="pelt" class="level2">
+<h2 class="anchored" data-anchor-id="pelt">PELT</h2>
+<p>PELT (Pruned Exact Linear Time) is an exact algorithm that efficiently identifies optimal change points by using dynamic programming combined with pruning strategies to reduce computational time (Killick et al., 2012). See changepoint package</p>
+</section>
+<section id="segment-neighbourhood" class="level2">
+<h2 class="anchored" data-anchor-id="segment-neighbourhood">SEGMENT Neighbourhood</h2>
+<p>Segment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger &amp; Lawrence, 1989 ; Bai &amp; Perron, 2003). See changepoint package</p>
+</section>
+<section id="pettitt" class="level2">
+<h2 class="anchored" data-anchor-id="pettitt">PETTITT</h2>
+<p>f</p>
+</section>
+<section id="hubert" class="level2">
+<h2 class="anchored" data-anchor-id="hubert">HUBERT</h2>
+<p>Hubert's method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package</p>
+</section>
+<section id="cumseg" class="level2">
+<h2 class="anchored" data-anchor-id="cumseg">CumSeg</h2>
+<p>CumSeg (Cumulative Segmentation) is another optimization technique, primarily designed for detecting breakpoints in genomic data (Muggeo &amp; Adelfio, 2011). See jumpoint package</p>
+</section>
+<section id="cpm" class="level2">
+<h2 class="anchored" data-anchor-id="cpm">CPM</h2>
+<p>CPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See CPM package</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

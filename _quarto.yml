@@ -8,7 +8,10 @@ website:
     left:
       - href: index.qmd
         text: Accueil
-
+      - href: methode.qmd
+        text: Méthode de segmentation
+      - href: méthodo.qmd
+        text: Méthologie
 
 format:
   html:

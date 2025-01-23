@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "index",
     "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+    "text": "L’application RiverSeg regroupe l’ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L’application permet d’harmoniser les résultats des différentes méthodes et de les spatialiser.\nL’application a été développé dans le cadre de ma thèse au sein du projet [MapdO](https://evs-gis.github.io/mapdowebsite/)\nContact : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - lise.vaudor@ens-lyon.fr"
   },
   {
     "objectID": "index.html#quarto",
@@ -19,5 +19,68 @@
     "title": "index",
     "section": "Running Code",
     "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "methode.html",
+    "href": "methode.html",
+    "title": "méthode de segmentation",
+    "section": "",
+    "text": "De nombreuses méthodes sont implémentés dans l’application afin de comparer les méthodes selon la distribution des données et des objectifs de la segmentation.\nCertaines méthodes ont été évalués dans un comparatif sur des données simulées (De Almeida et al., in press)."
+  },
+  {
+    "objectID": "methode.html#beast",
+    "href": "methode.html#beast",
+    "title": "méthode de segmentation",
+    "section": "BEAST",
+    "text": "BEAST\nBEAST (Bayesian Estimator of Abrupt Change, Seasonal Change, and Trend) is an algorithm designed to detect abrupt change points in time series data, as well as to capture underlying trends and seasonal cycles (Zhao et al., 2019). See Rbeast package"
+  },
+  {
+    "objectID": "methode.html#binary-segmentation",
+    "href": "methode.html#binary-segmentation",
+    "title": "méthode de segmentation",
+    "section": "BINARY SEGMENTATION",
+    "text": "BINARY SEGMENTATION\nBinary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott & Knott, 1974 ; Sen & Srivastava, 1975). See changepoint package"
+  },
+  {
+    "objectID": "methode.html#pelt",
+    "href": "methode.html#pelt",
+    "title": "méthode de segmentation",
+    "section": "PELT",
+    "text": "PELT\nPELT (Pruned Exact Linear Time) is an exact algorithm that efficiently identifies optimal change points by using dynamic programming combined with pruning strategies to reduce computational time (Killick et al., 2012). See changepoint package"
+  },
+  {
+    "objectID": "methode.html#segment-neighbourhood",
+    "href": "methode.html#segment-neighbourhood",
+    "title": "méthode de segmentation",
+    "section": "SEGMENT Neighbourhood",
+    "text": "SEGMENT Neighbourhood\nSegment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger & Lawrence, 1989 ; Bai & Perron, 2003). See changepoint package"
+  },
+  {
+    "objectID": "methode.html#pettitt",
+    "href": "methode.html#pettitt",
+    "title": "méthode de segmentation",
+    "section": "PETTITT",
+    "text": "PETTITT\nf"
+  },
+  {
+    "objectID": "methode.html#hubert",
+    "href": "methode.html#hubert",
+    "title": "méthode de segmentation",
+    "section": "HUBERT",
+    "text": "HUBERT\nHubert's method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package"
+  },
+  {
+    "objectID": "methode.html#cumseg",
+    "href": "methode.html#cumseg",
+    "title": "méthode de segmentation",
+    "section": "CumSeg",
+    "text": "CumSeg\nCumSeg (Cumulative Segmentation) is another optimization technique, primarily designed for detecting breakpoints in genomic data (Muggeo & Adelfio, 2011). See jumpoint package"
+  },
+  {
+    "objectID": "methode.html#cpm",
+    "href": "methode.html#cpm",
+    "title": "méthode de segmentation",
+    "section": "CPM",
+    "text": "CPM\nCPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See CPM package"
   }
 ]

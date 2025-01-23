@@ -2,23 +2,8 @@
 title: "index"
 ---
 
-## Quarto
+L'application RiverSeg regroupe l'ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L'application permet d'harmoniser les résultats des différentes méthodes (voir section méthodes) et de les spatialiser. L'idée est de comparer les méthode de segmentation
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+L'application a été développé dans le cadre de ma thèse au sein du projet [MapdO](https://evs-gis.github.io/mapdowebsite/).
 
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+**Contact** : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - [thomas.de_almeida\@ens-lyon.fr](mailto:thomas.de_almeida@ens-lyon.fr)
