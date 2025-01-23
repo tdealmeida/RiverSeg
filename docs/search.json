@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "index",
     "section": "",
-    "text": "L’application RiverSeg regroupe l’ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L’application permet d’harmoniser les résultats des différentes méthodes et de les spatialiser.\nL’application a été développé dans le cadre de ma thèse au sein du projet [MapdO](https://evs-gis.github.io/mapdowebsite/)\nContact : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - lise.vaudor@ens-lyon.fr"
+    "text": "L’application RiverSeg regroupe l’ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L’application permet d’harmoniser les résultats des différentes méthodes (voir section méthodes) et de les spatialiser. L’idée est de comparer les méthode de segmentation\nL’application a été développé dans le cadre de ma thèse au sein du projet MapdO.\nContact : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - thomas.de_almeida@ens-lyon.fr"
   },
   {
     "objectID": "index.html#quarto",
@@ -38,8 +38,8 @@
     "objectID": "methode.html#binary-segmentation",
     "href": "methode.html#binary-segmentation",
     "title": "méthode de segmentation",
-    "section": "BINARY SEGMENTATION",
-    "text": "BINARY SEGMENTATION\nBinary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott & Knott, 1974 ; Sen & Srivastava, 1975). See changepoint package"
+    "section": "Binary Segmentation",
+    "text": "Binary Segmentation\nBinary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott & Knott, 1974 ; Sen & Srivastava, 1975). See changepoint package"
   },
   {
     "objectID": "methode.html#pelt",
@@ -52,22 +52,22 @@
     "objectID": "methode.html#segment-neighbourhood",
     "href": "methode.html#segment-neighbourhood",
     "title": "méthode de segmentation",
-    "section": "SEGMENT Neighbourhood",
-    "text": "SEGMENT Neighbourhood\nSegment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger & Lawrence, 1989 ; Bai & Perron, 2003). See changepoint package"
+    "section": "Segment Neighbourhood",
+    "text": "Segment Neighbourhood\nSegment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger & Lawrence, 1989 ; Bai & Perron, 2003). See changepoint package"
   },
   {
     "objectID": "methode.html#pettitt",
     "href": "methode.html#pettitt",
     "title": "méthode de segmentation",
-    "section": "PETTITT",
-    "text": "PETTITT\nf"
+    "section": "Pettitt",
+    "text": "Pettitt\nf"
   },
   {
     "objectID": "methode.html#hubert",
     "href": "methode.html#hubert",
     "title": "méthode de segmentation",
-    "section": "HUBERT",
-    "text": "HUBERT\nHubert's method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package"
+    "section": "Hubert",
+    "text": "Hubert\nHubert's method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package"
   },
   {
     "objectID": "methode.html#cumseg",
@@ -82,5 +82,12 @@
     "title": "méthode de segmentation",
     "section": "CPM",
     "text": "CPM\nCPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See CPM package"
+  },
+  {
+    "objectID": "methodo.html",
+    "href": "methodo.html",
+    "title": "Méthodologie",
+    "section": "",
+    "text": "Vous pouvez comparer les méthodes de segmentation avec des données d’exemples afin de mieux appréhender le fonctionnement de chaque algortihm. Les données d’exemples provennent de la Fluvial Corridor Toolbox (Dunesmes et al., 2024). Ce sont des données longitudinales sur des descripteurs géomophologiques à l’instar de la largeur de la bande active. Ces données sont satials et vous pouvez observer les ruptures sur la carte juste en dessous.\nEnsuite, il est mis à disposition des données simulées que vous pouvez paramétrer librement afin de tester le résultat des méthodes de segmentation selon différentes paramètre de série comme la variation de la longueur.\nEnfin, il vous est possible d’importer vos propres données pour appliquer et comparer les méthodes selon vos propres objectifs."
   }
 ]
