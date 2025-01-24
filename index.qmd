@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "Informations"
 ---
 
 L'application RiverSeg regroupe l'ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L'application permet d'harmoniser les résultats des différentes méthodes (voir section méthodes) et de les spatialiser. L'idée est de comparer les méthode de segmentation

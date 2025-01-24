@@ -1,11 +1,10 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # RiverSeg
 
 L'application RiverSeg permet de visualiser et d'analyser les différentes méthodes de segmentation. Elle est principalement utilisée dans le domaine de l'hydromorphologie fluviale pour l'étude des réseaux hydrographiques. RiverSeg peut s'avérer précieuse dans divers autres domaines d'étude, offrant des outils de segmentation et d'analyse adaptés à de nombreuses disciplines scientifiques et environnementales.
 
-Documentation : 
+Documentation : <https://tdealmeida.github.io/RiverSeg/>
 
 ## Installation
 
@@ -21,5 +20,4 @@ De Almeida, T. (2025). tdealmeida/RiverSeg. UMR5600 Environnement, Ville, Socié
 
 ## Licence
 
-This program is released under the [GNU Public License
-v3](https://github.com/EVS-GIS/mapdoapp/blob/main/LICENSE).
+This program is released under the GNU Public License v3.

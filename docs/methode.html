@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mapd’O - méthode de segmentation</title>
+<title>RiverSeg - Méthode de segmentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Mapd’O</span>
+    <span class="navbar-title">RiverSeg</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -92,8 +92,8 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Méthode de segmentation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./méthodo.qmd" rel="" target="">
- <span class="menu-text">Méthologie</span></a>
+    <a class="nav-link" href="./methodo.html" rel="" target="">
+ <span class="menu-text">Méthodologie</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -120,6 +120,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#hubert" id="toc-hubert" class="nav-link" data-scroll-target="#hubert">Hubert</a></li>
   <li><a href="#cumseg" id="toc-cumseg" class="nav-link" data-scroll-target="#cumseg">CumSeg</a></li>
   <li><a href="#cpm" id="toc-cpm" class="nav-link" data-scroll-target="#cpm">CPM</a></li>
+  <li><a href="#e.divisive" id="toc-e.divisive" class="nav-link" data-scroll-target="#e.divisive">E.Divisive</a></li>
+  <li><a href="#envcpt" id="toc-envcpt" class="nav-link" data-scroll-target="#envcpt">ENVCPT</a></li>
+  <li><a href="#kcprs" id="toc-kcprs" class="nav-link" data-scroll-target="#kcprs">kcpRS</a></li>
+  <li><a href="#ggs" id="toc-ggs" class="nav-link" data-scroll-target="#ggs">GGS</a></li>
+  <li><a href="#buishands" id="toc-buishands" class="nav-link" data-scroll-target="#buishands">Buishands</a></li>
   </ul>
 </nav>
     </div>
@@ -128,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">méthode de segmentation</h1>
+<h1 class="title">Méthode de segmentation</h1>
 </div>
 
 
@@ -147,35 +152,53 @@ ul.task-list li input[type="checkbox"] {
 <p>Certaines méthodes ont été évalués dans un comparatif sur des données simulées (De Almeida et al., in press).</p>
 <section id="beast" class="level2">
 <h2 class="anchored" data-anchor-id="beast">BEAST</h2>
-<p>BEAST (Bayesian Estimator of Abrupt Change, Seasonal Change, and Trend) is an algorithm designed to detect abrupt change points in time series data, as well as to capture underlying trends and seasonal cycles (Zhao et al., 2019). See Rbeast package</p>
+<p>BEAST (Bayesian Estimator of Abrupt Change, Seasonal Change, and Trend) is an algorithm designed to detect abrupt change points in time series data, as well as to capture underlying trends and seasonal cycles (Zhao et al., 2019). See <a href="https://cran.r-project.org/web/packages/Rbeast/Rbeast.pdf">Rbeast</a> package</p>
 </section>
 <section id="binary-segmentation" class="level2">
 <h2 class="anchored" data-anchor-id="binary-segmentation">Binary Segmentation</h2>
-<p>Binary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott &amp; Knott, 1974 ; Sen &amp; Srivastava, 1975). See changepoint package</p>
+<p>Binary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott &amp; Knott, 1974 ; Sen &amp; Srivastava, 1975). See <a href="https://cran.r-project.org/web/packages/changepoint/changepoint.pdf">changepoint</a> package</p>
 </section>
 <section id="pelt" class="level2">
 <h2 class="anchored" data-anchor-id="pelt">PELT</h2>
-<p>PELT (Pruned Exact Linear Time) is an exact algorithm that efficiently identifies optimal change points by using dynamic programming combined with pruning strategies to reduce computational time (Killick et al., 2012). See changepoint package</p>
+<p>PELT (Pruned Exact Linear Time) is an exact algorithm that efficiently identifies optimal change points by using dynamic programming combined with pruning strategies to reduce computational time (Killick et al., 2012). See <a href="https://cran.r-project.org/web/packages/changepoint/changepoint.pdf">changepoint</a> package</p>
 </section>
 <section id="segment-neighbourhood" class="level2">
 <h2 class="anchored" data-anchor-id="segment-neighbourhood">Segment Neighbourhood</h2>
-<p>Segment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger &amp; Lawrence, 1989 ; Bai &amp; Perron, 2003). See changepoint package</p>
+<p>Segment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger &amp; Lawrence, 1989 ; Bai &amp; Perron, 2003). See <a href="https://cran.r-project.org/web/packages/changepoint/changepoint.pdf">changepoint</a> package</p>
 </section>
 <section id="pettitt" class="level2">
 <h2 class="anchored" data-anchor-id="pettitt">Pettitt</h2>
-<p>f</p>
 </section>
 <section id="hubert" class="level2">
 <h2 class="anchored" data-anchor-id="hubert">Hubert</h2>
-<p>Hubert's method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package</p>
+<p>Hubert's method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See <a href="https://github.com/lvaudor/hubr/tree/master">hubr</a> package</p>
 </section>
 <section id="cumseg" class="level2">
 <h2 class="anchored" data-anchor-id="cumseg">CumSeg</h2>
-<p>CumSeg (Cumulative Segmentation) is another optimization technique, primarily designed for detecting breakpoints in genomic data (Muggeo &amp; Adelfio, 2011). See jumpoint package</p>
+<p>CumSeg (Cumulative Segmentation) is another optimization technique, primarily designed for detecting breakpoints in genomic data (Muggeo &amp; Adelfio, 2011). See <a href="https://cran.r-project.org/web/packages/cumSeg/cumSeg.pdf">cumSeg</a> package</p>
 </section>
 <section id="cpm" class="level2">
 <h2 class="anchored" data-anchor-id="cpm">CPM</h2>
-<p>CPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See CPM package</p>
+<p>CPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See <a href="https://cran.r-project.org/web/packages/cpm/cpm.pdf">CPM</a> package</p>
+</section>
+<section id="e.divisive" class="level2">
+<h2 class="anchored" data-anchor-id="e.divisive">E.Divisive</h2>
+<p>voir <a href="https://cran.r-project.org/web/packages/ecp/ecp.pdf">ecp</a> package</p>
+</section>
+<section id="envcpt" class="level2">
+<h2 class="anchored" data-anchor-id="envcpt">ENVCPT</h2>
+<p>voir <a href="https://cran.r-project.org/web/packages/EnvCpt/index.html">ENVCPT</a> package</p>
+</section>
+<section id="kcprs" class="level2">
+<h2 class="anchored" data-anchor-id="kcprs">kcpRS</h2>
+<p>voir <a href="https://cran.r-project.org/web/packages/kcpRS/kcpRS.pdf">kcpRS</a> package</p>
+</section>
+<section id="ggs" class="level2">
+<h2 class="anchored" data-anchor-id="ggs">GGS</h2>
+<p>voir <a href="https://github.com/cvxgrp/GGS">GGS</a> python package</p>
+</section>
+<section id="buishands" class="level2">
+<h2 class="anchored" data-anchor-id="buishands">Buishands</h2>
 
 
 </section>

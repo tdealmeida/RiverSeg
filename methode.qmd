@@ -24,8 +24,6 @@ Segment Neighbourhood is another exact algorithm that employs dynamic programmin
 
 ## Pettitt
 
-f
-
 ## Hubert
 
 Hubert\'s method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package

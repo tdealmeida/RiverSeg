@@ -3,15 +3,15 @@ project:
   output-dir: docs
 
 website:
-  title: "Mapd'O"
+  title: "RiverSeg"
   navbar:
     left:
       - href: index.qmd
         text: Accueil
       - href: methode.qmd
         text: Méthode de segmentation
-      - href: méthodo.qmd
-        text: Méthologie
+      - href: methodo.qmd
+        text: Méthodologie
 
 format:
   html:
