@@ -1,5 +1,5 @@
 ---
-title: "méthode de segmentation"
+title: "Méthode de segmentation"
 ---
 
 De nombreuses méthodes sont implémentés dans l'application afin de comparer les méthodes selon la distribution des données et des objectifs de la segmentation.
@@ -8,30 +8,48 @@ Certaines méthodes ont été évalués dans un comparatif sur des données simu
 
 ## BEAST
 
-BEAST (Bayesian Estimator of Abrupt Change, Seasonal Change, and Trend) is an algorithm designed to detect abrupt change points in time series data, as well as to capture underlying trends and seasonal cycles (Zhao et al., 2019). See Rbeast package
+BEAST (Bayesian Estimator of Abrupt Change, Seasonal Change, and Trend) is an algorithm designed to detect abrupt change points in time series data, as well as to capture underlying trends and seasonal cycles (Zhao et al., 2019). See [Rbeast](https://cran.r-project.org/web/packages/Rbeast/Rbeast.pdf) package
 
 ## Binary Segmentation
 
-Binary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott & Knott, 1974 ; Sen & Srivastava, 1975). See changepoint package
+Binary Segmentation is an approximate, greedy algorithm that sequentially identifies change points in an iterative process (Scott & Knott, 1974 ; Sen & Srivastava, 1975). See [changepoint](https://cran.r-project.org/web/packages/changepoint/changepoint.pdf) package
 
 ## PELT
 
-PELT (Pruned Exact Linear Time) is an exact algorithm that efficiently identifies optimal change points by using dynamic programming combined with pruning strategies to reduce computational time (Killick et al., 2012). See changepoint package
+PELT (Pruned Exact Linear Time) is an exact algorithm that efficiently identifies optimal change points by using dynamic programming combined with pruning strategies to reduce computational time (Killick et al., 2012). See [changepoint](https://cran.r-project.org/web/packages/changepoint/changepoint.pdf) package
 
 ## Segment Neighbourhood 
 
-Segment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger & Lawrence, 1989 ; Bai & Perron, 2003). See changepoint package
+Segment Neighbourhood is another exact algorithm that employs dynamic programming to exhaustively search for the optimal segmentation by considering all possible combinations of change points up to a specified maximum number (Auger & Lawrence, 1989 ; Bai & Perron, 2003). See [changepoint](https://cran.r-project.org/web/packages/changepoint/changepoint.pdf) package
 
 ## Pettitt
 
 ## Hubert
 
-Hubert\'s method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See hubr package
+Hubert\'s method is designed to optimally partition a continuous data series into 𝑘 homogeneous segments by maximizing the contrast between adjacent segments while ensuring homogeneity within each segment (Hubert, 1989 ; Hubert et al., 2000). See [hubr](https://github.com/lvaudor/hubr/tree/master) package
 
 ## CumSeg
 
-CumSeg (Cumulative Segmentation) is another optimization technique, primarily designed for detecting breakpoints in genomic data (Muggeo & Adelfio, 2011). See jumpoint package
+CumSeg (Cumulative Segmentation) is another optimization technique, primarily designed for detecting breakpoints in genomic data (Muggeo & Adelfio, 2011). See [cumSeg](https://cran.r-project.org/web/packages/cumSeg/cumSeg.pdf) package
 
 ## CPM
 
-CPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See CPM package
+CPM (Change Point Model) is a framework that detects multiple change points in data series, particularly suited for hydrological and environmental datasets (Hawkins et al., 2003; Hawkins and Zamba, 2005). See [CPM](https://cran.r-project.org/web/packages/cpm/cpm.pdf) package
+
+## E.Divisive
+
+voir [ecp](https://cran.r-project.org/web/packages/ecp/ecp.pdf) package
+
+## ENVCPT
+
+voir [ENVCPT](https://cran.r-project.org/web/packages/EnvCpt/index.html) package
+
+## kcpRS
+
+voir [kcpRS](https://cran.r-project.org/web/packages/kcpRS/kcpRS.pdf) package
+
+## GGS
+
+voir [GGS](https://github.com/cvxgrp/GGS) python package
+
+## Buishands
