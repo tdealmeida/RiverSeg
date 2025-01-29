@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Informations",
     "section": "",
-    "text": "L’application RiverSeg regroupe l’ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L’application permet d’harmoniser les résultats des différentes méthodes (voir section méthodes) et de les spatialiser. L’idée est de comparer les méthode de segmentation\nL’application a été développé dans le cadre de ma thèse au sein du projet MapdO.\nContact : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - thomas.de_almeida@ens-lyon.fr"
+    "text": "L’application RiverSeg regroupe l’ensemble des méthode de segmentation univariée (extension pour multivariée) implémenté dans R. L’application permet d’harmoniser les résultats des différentes méthodes (voir section méthodes) et de les spatialiser. L’idée est de comparer les méthode de segmentation\nL’application a été développé dans le cadre de ma thèse au sein du projet MapdO.\nPour citer : De Almeida, T. (2025).tdealmeida/RiverSeg. UMR5600 EVS. DOI : https://doi.org/10.5281/zenodo.14712239\nContact : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - thomas.de_almeida@ens-lyon.fr"
   },
   {
     "objectID": "index.html#quarto",

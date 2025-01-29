@@ -6,4 +6,6 @@ L'application RiverSeg regroupe l'ensemble des méthode de segmentation univari�
 
 L'application a été développé dans le cadre de ma thèse au sein du projet [MapdO](https://evs-gis.github.io/mapdowebsite/).
 
+Pour citer : De Almeida, T. (2025).tdealmeida/RiverSeg. UMR5600 EVS. DOI : <https://doi.org/10.5281/zenodo.14712239>
+
 **Contact** : Thomas De Almeida (CNRS UMR 5600, Environnement Ville Société) - [thomas.de_almeida\@ens-lyon.fr](mailto:thomas.de_almeida@ens-lyon.fr)
