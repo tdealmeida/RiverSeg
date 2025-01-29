@@ -88,7 +88,7 @@
     "href": "methodo.html",
     "title": "Méthodologie",
     "section": "",
-    "text": "Vous pouvez comparer les méthodes de segmentation avec des données d’exemples afin de mieux appréhender le fonctionnement de chaque algorithme. Les données d’exemples proviennent de la Fluvial Corridor Toolbox (Dunesmes et al., 2024). Ce sont des données longitudinales sur des descripteurs géomophologiques à l’instar de la largeur de la bande active. Ces données sont spatialisées et vous pouvez observer les ruptures sur la carte juste en dessous.\nEnsuite, il est mis à disposition des données simulées que vous pouvez paramétrer librement afin de tester le résultat des méthodes de segmentation selon différentes paramètre de série comme la variation de la longueur.\nEnfin, il vous est possible d’importer vos propres données pour appliquer et comparer les méthodes selon vos propres objectifs."
+    "text": "Vous pouvez comparer les méthodes de segmentation selon plusieurs sources de données:"
   },
   {
     "objectID": "methode.html#e.divisive",
@@ -124,5 +124,26 @@
     "title": "Méthode de segmentation",
     "section": "Buishands",
     "text": "Buishands"
+  },
+  {
+    "objectID": "methodo.html#données-dexemple",
+    "href": "methodo.html#données-dexemple",
+    "title": "Méthodologie",
+    "section": "Données d’exemple",
+    "text": "Données d’exemple\nL’application a été crée dans un objectif de segmenter des données longitudinales sur des variables géomorphologiques de rivière. Les données d’exemples proviennent de la Fluvial Corridor Toolbox (Dunesmes et al., 2024). On retrouve un grand nombre de descripteurs comme la largeur de la bande active ou la largeur de fond de vallée. Les données sont spatialisées et sont observables dans la carte juste en dessous du graphique. La localisation des rupture est symbolisée par des points rouge dans la carte."
+  },
+  {
+    "objectID": "methodo.html#données-simulées",
+    "href": "methodo.html#données-simulées",
+    "title": "Méthodologie",
+    "section": "Données simulées",
+    "text": "Données simulées\nVous pouvez créer votre propre série afin de contrôler l’ensemble des paramètre comme le nombre de rupture (K) afin de la faire correspondre plus ou moins avec vos données. Vous pourrez ensuite comparer l’ensemble des méthodes de segmentation sur votre série. Pour en savoir plus dans la génération de la série, voir De Almeida et al., in press.\nPlusieurs paramètre sont possibles:\n\nN : Longueur totale de la série\nK : Nombre de rupture dans la série\nRatio R : Ratio qui détermine l’équilibre entre l’écart-type inter-segment et intra-segment. Il influence la capacité à segmenter correctement en ajustant les niveaux de bruit et les valeurs moyennes de chaque segment. Pour résumer, cela correspond à la difficulté d’une série à être segmentée.\nDelta : Coefficient qui détermine le type de transition entre les segments et est basé sur la longueur de la série. Si delta = 0, alors les segments sont collés tandis que si Delta est positif, alors une transition graduelle est placée entre les segments."
+  },
+  {
+    "objectID": "methodo.html#importation-de-données",
+    "href": "methodo.html#importation-de-données",
+    "title": "Méthodologie",
+    "section": "Importation de données",
+    "text": "Importation de données\nEnfin, il est possible d’importer vos propres données depuis un .CSV"
   }
 ]

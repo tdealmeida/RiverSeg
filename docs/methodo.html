@@ -108,7 +108,15 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#données-dexemple" id="toc-données-dexemple" class="nav-link active" data-scroll-target="#données-dexemple">Données d’exemple</a></li>
+  <li><a href="#données-simulées" id="toc-données-simulées" class="nav-link" data-scroll-target="#données-simulées">Données simulées</a></li>
+  <li><a href="#importation-de-données" id="toc-importation-de-données" class="nav-link" data-scroll-target="#importation-de-données">Importation de données</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -130,11 +138,28 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Vous pouvez comparer les méthodes de segmentation avec des données d’exemples afin de mieux appréhender le fonctionnement de chaque algorithme. Les données d’exemples proviennent de la <a href="https://tramebleue.github.io/fct-cli/">Fluvial Corridor Toolbox</a> (Dunesmes et al., 2024). Ce sont des données longitudinales sur des descripteurs géomophologiques à l’instar de la largeur de la bande active. Ces données sont spatialisées et vous pouvez observer les ruptures sur la carte juste en dessous.</p>
-<p>Ensuite, il est mis à disposition des données simulées que vous pouvez paramétrer librement afin de tester le résultat des méthodes de segmentation selon différentes paramètre de série comme la variation de la longueur.</p>
-<p>Enfin, il vous est possible d’importer vos propres données pour appliquer et comparer les méthodes selon vos propres objectifs.</p>
+<p>Vous pouvez comparer les méthodes de segmentation selon plusieurs sources de données:</p>
+<section id="données-dexemple" class="level2">
+<h2 class="anchored" data-anchor-id="données-dexemple">Données d’exemple</h2>
+<p>L’application a été crée dans un objectif de segmenter des données longitudinales sur des variables géomorphologiques de rivière. Les données d’exemples proviennent de la <a href="https://tramebleue.github.io/fct-cli/">Fluvial Corridor Toolbox</a> (Dunesmes et al., 2024). On retrouve un grand nombre de descripteurs comme la largeur de la bande active ou la largeur de fond de vallée. Les données sont spatialisées et sont observables dans la carte juste en dessous du graphique. La localisation des rupture est symbolisée par des points rouge dans la carte.</p>
+</section>
+<section id="données-simulées" class="level2">
+<h2 class="anchored" data-anchor-id="données-simulées">Données simulées</h2>
+<p>Vous pouvez créer votre propre série afin de contrôler l’ensemble des paramètre comme le nombre de rupture (K) afin de la faire correspondre plus ou moins avec vos données. Vous pourrez ensuite comparer l’ensemble des méthodes de segmentation sur votre série. Pour en savoir plus dans la génération de la série, voir De Almeida et al., in press.</p>
+<p>Plusieurs paramètre sont possibles:</p>
+<ul>
+<li><p>N : Longueur totale de la série</p></li>
+<li><p>K : Nombre de rupture dans la série</p></li>
+<li><p>Ratio R : Ratio qui détermine l’équilibre entre l’écart-type inter-segment et intra-segment. Il influence la capacité à segmenter correctement en ajustant les niveaux de bruit et les valeurs moyennes de chaque segment. Pour résumer, cela correspond à la difficulté d’une série à être segmentée.</p></li>
+<li><p>Delta : Coefficient qui détermine le type de transition entre les segments et est basé sur la longueur de la série. Si delta = 0, alors les segments sont collés tandis que si Delta est positif, alors une transition graduelle est placée entre les segments.</p></li>
+</ul>
+</section>
+<section id="importation-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="importation-de-données">Importation de données</h2>
+<p>Enfin, il est possible d’importer vos propres données depuis un .CSV</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
