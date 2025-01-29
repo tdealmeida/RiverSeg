@@ -245,7 +245,9 @@ ui <- fluidPage(
         bsCollapsePanel(
           title = "Import des Données",
           radioButtons("Data", "Type de données",
-                       choices = c("Exemple", "Simulations", "Import de données")),
+                       choices = c("Exemple" = "Exemple",
+                                   "Simulations" = "Simulations",
+                                   "Import de données" = "Import de données")),
           
           checkboxInput("log", "Transformation logarithmique", FALSE),
           
@@ -263,12 +265,14 @@ ui <- fluidPage(
           # Si 'Simulations' est sélectionné
           conditionalPanel(
             condition = "input.Data == 'Simulations'",
-            numericInput("N", "Longueur de la série (N)", value = 1000),
-            numericInput("K", "Nombre de segments (K)", value = 5),
-            numericInput("Theta", "Theta (θ)", value = 3),
-            numericInput("Ratio", "Ratio de Sigma / Theta (r)", value = 1),
-            numericInput("heterosced", "Hétéroscédasticité (H)", value = 1),
-            sliderInput("Delta", "Distance inter-segments x N (δ)", 
+            numericInput("N", "N (longueur de la série)", value = 1000),
+            numericInput("K", "K (Nombre de segments)", value = 5),
+            sliderInput("Ratio", "Ratio R ('segmentabilité')", min = 0, max = 2, value = 0.5, step = 0.1),
+            radioButtons("heterosced", "Sélectionnez une option :",
+                         choices = c("Homoscédasticité" = 0,
+                                     "Hétéroscédasticité" = 1),
+                         selected = 0),
+            sliderInput("Delta", "Delta (Distance inter-segments)", 
                         min = 0, max = 0.05, value = 0, step = 0.01)
           ),
           
@@ -293,9 +297,10 @@ ui <- fluidPage(
           title = "Paramètres de Segmentation",
           selectInput("methode_segmentation", "Méthode de segmentation",
                       choices = c("Changepoint", "Hubert", "E.divisive", "E.agglo", 
-                                  "CPM", "GGS", "EnvCpt", "Rbeast", "Cumseg", "KcpRS", 
+                                  "CPM", "EnvCpt", "Rbeast", "Cumseg", "KcpRS", 
                                   "Pettitt", "Buishands U test", "Buishands Range test",
-                                  "Bfast", "SNHT", "Ruptures (python)"),
+                                  "Bfast", "SNHT"),
+                      #,"GGS", Ruptures (python)"),
                       selected = "Changepoint"),
           
           # Si 'Changepoint' est sélectionné
@@ -455,28 +460,13 @@ ui <- fluidPage(
       conditionalPanel(
         condition = "input.Data == 'Exemple'",
         checkboxInput("show_geology", "Afficher la carte géologique", FALSE),
-        checkboxInput("show_satellite", "Afficher la carte aérienne", FALSE)
+        checkboxInput("show_satellite", "Afficher la photographie aérienne", FALSE)
       ),
       
       hr(),
       checkboxInput("segment_button", HTML("<b>Activer la segmentation</b>"), FALSE),
       
-      hr(),
-      h4("Code de segmentation :"),
-      verbatimTextOutput("code_display"),
       
-      actionButton("copy_button", "Copier le code"),
-      
-      tags$script(HTML("
-    Shiny.addCustomMessageHandler('copyText', function(code) {
-      var textArea = document.createElement('textarea');
-      textArea.value = code;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-    });
-  ")),
       
     ),
     
@@ -499,8 +489,11 @@ ui <- fluidPage(
                    leafletOutput("map")
                  )),
         
-        tabPanel("doc")
-        
+        tabPanel("Information",
+                 h1("Informations / Aide"),
+                 p("Vous trouverez un guide et de multiples informations dans le lien ci-dessous:"),
+                 a("https://tdealmeida.github.io/RiverSeg/", href = "https://tdealmeida.github.io/RiverSeg/", target = "_blank")
+        )
       )
     )
     
@@ -527,9 +520,9 @@ server <- function(input, output,session) {
   
   simulate_data = reactive({  # reactive pour obtenir les Simulations
     
-    simulate <- function(N, K, ratio,theta,delta,heterosced) {
+    simulate <- function(N, K, ratio,theta=3,delta,heterosced) {
       
-      margin = ceiling(N / 40) # marge de distance entre les segments
+      margin = ceiling(N * delta) # marge de distance entre les segments
       if (K - 1 > (N - margin - 1)) { # Vérification que le nombre de segments est possible
         k = seq_len(N - margin - 1) # Si ce n'est pas possible, on met un segment par point
       } else { 
@@ -547,10 +540,12 @@ server <- function(input, output,session) {
         mu = rnorm(K, 0, theta),  # Choix de la moyenne de chaque segment en fonction de theta
         sigma = ratio * theta * (1 - heterosced) + ratio * abs(mu) / sqrt(2/pi) * heterosced) # Choix de l'écart type de chaque segment 
       
+      
       # obtention des numeros de segments
       series <- rep(0, N) # Création d'une série de 0
       series[k] <- 1 # Ajout des segments
       series <- cumsum(series) + 1 # cumsum pour avoir les numéros de segments
+      
       
       # création de série entière
       tib <- tibble::tibble( # Création de la série entière
@@ -559,58 +554,39 @@ server <- function(input, output,session) {
       ) %>% 
         left_join(tib_seg, by = "segment") %>%  # Jointure avec les segments
         mutate(
-          x = mu + rnorm(N, 0, sd = sigma) # création de la série entière en ajoutant du bruit (sigma)
+          x = mu + rnorm(N, 0, sd = sigma), # Création de la série entière en ajoutant du bruit (sigma)
+          template = mu + rnorm(N,0,0)# création de la série entière en mode template sans bruit
         )
       
+      
       # Ajout d'une distance entre les segments en remplaçant par des NA en fonction de N
-      last_segment <- tib$segment[1] # Initialisation du dernier segment
-      for (i in 2:nrow(tib)) { # Boucle pour ajouter des NA
-        if (!is.na(tib$segment[i]) && tib$segment[i] != last_segment 
-            && tib$segment[i] != 1 && !is.na(last_segment)) { # Si le segment est différent du dernier segment
-          if (delta > 0) { # Si delta est supérieur à 0
-            end_row <- min(i + delta * N - 1, nrow(tib)) # Calcul de la fin de la zone à remplacer par des NA
-            tib[i:end_row, ] <- NA # Remplacement par des NA
+      if (delta > 0) {
+        
+        last_segment <- tib$segment[1] # Initialisation du dernier segment
+        for (i in 2:nrow(tib)) { # Boucle pour ajouter des NA
+          if (!is.na(tib$segment[i]) && tib$segment[i] != last_segment 
+              && tib$segment[i] != 1 && !is.na(last_segment)) { # Si le segment est différent du dernier segment
+            if (delta > 0) { # Si delta est supérieur à 0
+              end_row <- min(i + delta * N - 1, nrow(tib)) # Calcul de la fin de la zone à remplacer par des NA
+              tib[i:end_row, ] <- NA # Remplacement par des NA
+            }
           }
+          last_segment <- tib$segment[i] # Mise à jour du dernier segment
         }
-        last_segment <- tib$segment[i] # Mise à jour du dernier segment
+        na_indices <- which(is.na(tib$x)) # selection des zones à interpoler
+        tib$x <- na.approx(tib$x) # interpolation linéaire des NA
+        tib$x[na_indices] <- tib$x[na_indices] + # ajout du bruit dans les zons interpolés
+          rnorm(length(na_indices), 0, mean(tib_seg$sigma))
+        k <- k + (delta * N / 2)
       }
-      na_indices <- which(is.na(tib$x)) # selection des zones à interpoler
-      tib$x <- na.approx(tib$x) # interpolation linéaire des NA
-      tib$x[na_indices] <- tib$x[na_indices] + # ajout du bruit dans les zons interpolés
-        rnorm(length(na_indices), 0, mean(tib_seg$sigma))
       
-      
-      # # Calcule de theta chapeau
-      # mean_by_segment <- tib %>%
-      #   group_by(segment) %>%
-      #   summarise(mean_segment = mean(x))
-      # global_mean <- mean(mean_by_segment$mean_segment)
-      # theta_hat <- sd(mean_by_segment$mean_segment)
-      
-      # Calcul de la moyenne et de l'écart type global + ratio
-      Emu_k <- mean(tib$mu, na.rm = TRUE)
-      mu_k <- tib_seg$mu
-      Esigma_ktheta <- mean(tib$sigma, na.rm = TRUE) / theta
-      Esigma_k <- mean(tib_seg$sigma, na.rm = TRUE)
-      sigma_k <- tib_seg$sigma
-      theta = theta
-      
-      # Calcul de nb_k soit le nombre de rupture
-      nb_k <- K-1
-      
-      # Calcul de la longueur des segments  
-      segment_sizes <- as.numeric(table(tib$segment))
-      min_segment <- which.min(segment_sizes)
-      min_segment_length <- segment_sizes[min_segment]
-      max_segment <- which.max(segment_sizes)
-      max_segment_length <- segment_sizes[max_segment]
       
       
       return(list(data=tib,breakpoints=k))
     }
     
-    result <- simulate(N = input$N, K = input$K, ratio = input$Ratio, theta = input$Theta,
-                       delta = input$Delta, heterosced = input$heterosced)
+    result <- simulate(N = input$N, K = input$K, ratio = input$Ratio,
+                       delta = input$Delta, heterosced =  as.numeric(input$heterosced))
   })
   
   
@@ -628,7 +604,7 @@ server <- function(input, output,session) {
   output$colonneUI <- renderUI({
     req(personal_data())  # Attendre que les données soient chargées
     colnames_data <- colnames(personal_data())  # Récupérer les noms de colonnes
-    selectInput("selectedCol", "Choisissez une colonne de série temporelle", choices = colnames_data)
+    selectInput("selectedCol", "Choisissez une variable", choices = colnames_data)
   })
   
   output$dataPreview <- renderTable({
@@ -731,13 +707,13 @@ server <- function(input, output,session) {
     
     if (input$methode_segmentation == "Changepoint"){  
       if (input$type_changement == "mean") {
-        seg <- cpt.mean(values, method = input$methode, penalty = input$penalty,Q=50, pen.value = get_penalty(),minseglen = 4)
+        seg <- cpt.mean(values, method = input$methode, penalty = input$penalty,Q=150, pen.value = get_penalty())
       }
       else if (input$type_changement == "var") {
-        seg <- cpt.var(values, method = input$methode, penalty = input$penalty,Q=50, pen.value = get_penalty(),minseglen = 4)
+        seg <- cpt.var(values, method = input$methode, penalty = input$penalty,Q=150, pen.value = get_penalty(),minseglen = 4)
       }
       else if (input$type_changement == "meanvar") {
-        seg <- cpt.meanvar(values, method = input$methode, penalty = input$penalty, Q=50, pen.value = get_penalty(),minseglen = 4)
+        seg <- cpt.meanvar(values, method = input$methode, penalty = input$penalty, Q=150, pen.value = get_penalty(),minseglen = 4)
       }
       seg <- seg
       cpt_points <- seg@cpts
@@ -764,7 +740,7 @@ server <- function(input, output,session) {
     } 
     
     else if (input$methode_segmentation == "Rbeast"){
-      seg = beast(values,season = "none")
+      seg = beast(values,season = "none",tcp.minmax = c(0, 150))
       ncp_mode <- seg$trend$ncp_mode
       cp <- seg$trend$cp
       cpt_points <- cp[1:ncp_mode]
@@ -1179,6 +1155,19 @@ server <- function(input, output,session) {
         leafletProxy("map") %>%
           addCircleMarkers(data = get_data_axis()$breakpoint, lng = ~x, lat = ~y, radius = 5, color = "red")
       }
+      
+    } else if (input$show_satellite) {  # Nouvelle condition pour la photographie aérienne
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        clearMarkers() %>%
+        addProviderTiles(providers$Esri.WorldImagery) %>%
+        addPolylines(data = get_data_axis()$df, lng = ~x, lat = ~y)
+      
+      if (input$segment_button) {
+        leafletProxy("map") %>%
+          addCircleMarkers(data = get_data_axis()$breakpoint, lng = ~x, lat = ~y, radius = 5, color = "red")
+      }
+      
       
     } else {
       leafletProxy("map") %>%
