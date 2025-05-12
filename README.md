@@ -12,6 +12,18 @@ Documentation : <https://tdealmeida.github.io/RiverSeg/>
 remotes::install_github("https://https://github.com/tdealmeida/RiverSeg")
 ```
 
+### Quick start with docker-compose
+
+Copy the docker-compose.example.yml file to docker-compose.yml, and edit the environment variables with your values. 
+
+Then start the application with the following command line : 
+
+```sh
+docker compose up
+```
+
+And access the application at http://localhost:3838
+
 ## How to cite
 
 De Almeida, T. (2025). tdealmeida/RiverSeg. UMR5600 Environnement, Ville, Société. https://doi.org/10.5281/zenodo.14712239

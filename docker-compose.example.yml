@@ -1,0 +1,12 @@
+services:
+  app:
+    image: gcr.io/tdealmeida/riverseg:latest
+    build: .
+    ports:
+      - "3838:3840"
+    environment:
+      - DBMAPDO_HOST=
+      - DBMAPDO_PORT=
+      - DBMAPDO_NAME=
+      - DBMAPDO_USER=
+      - DBMAPDO_PASS=
