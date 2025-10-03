@@ -212,23 +212,25 @@ con <- DBI::dbConnect(RPostgres::Postgres(),
                       user      = Sys.getenv("DBMAPDO_USER"),
                       password  = Sys.getenv("DBMAPDO_PASS"))
 
+axis_Data <- sf::st_read(dsn = con, query = "SELECT * FROM network_axis")
 
-query <- "SELECT * FROM network_metrics"
+var_query <- "
+SELECT a.attname AS column_name
+FROM pg_catalog.pg_attribute a
+JOIN pg_catalog.pg_class c ON a.attrelid = c.oid
+JOIN pg_catalog.pg_namespace n ON c.relnamespace = n.oid
+WHERE c.relname = 'network_metrics'
+  AND n.nspname = 'public'
+  AND a.attnum > 0
+  AND NOT a.attisdropped
+  AND NOT a.attname in ('fid', 'axis', 'geom')
+ORDER BY a.attnum;
+"
+varnum <- DBI::dbGetQuery(con, var_query)
 
-Data <- sf::st_read(dsn = con, query = query)
+# dbDisconnect(con)
 
-dbDisconnect(con)
-
-
-
-
-str(Data)
-Data <- arrange(Data,measure)
-# varnum=colnames(Data)[which(purrr::map_df(Data, class)=="numeric")]
-varnum=colnames(Data)
-
-# Data <- conn()  # obtention des données 
-# varnum=colnames(Data) #récupération des colonnes 
+# Data <- arrange(Data,measure)
 
 
 ## définir l'interface utilisateur Shiny
@@ -255,7 +257,7 @@ ui <- fluidPage(
           conditionalPanel(
             condition = "input.Data == 'Exemple'",
             selectInput("riviere", "Sélectionnez la rivière", 
-                        choices = sort(unique(Data$toponyme)), 
+                        choices = sort(unique(axis_Data$toponyme)), 
                         selected = "le Drac"),
             selectInput("metrique", "Sélectionnez la variable", 
                         choices = varnum,
@@ -506,8 +508,10 @@ ui <- fluidPage(
 server <- function(input, output,session) {
   
   real_data = reactive({  # reactive pour obtenir les Exemple
+    data_query = DBI::sqlInterpolate(con, "SELECT * FROM network_metrics WHERE toponyme = ? ORDER BY measure", input$riviere)
+    data <- sf::st_read(dsn = con, query = data_query)
     
-    data <- Data[Data$toponyme == input$riviere, ]
+    # data <- Data[Data$toponyme == input$riviere, ]
     while (anyNA(data[1,])) {      # Supprimer les lignes au début et à la fin contenant des NA
       data <- data[-1,]
     }
@@ -629,7 +633,9 @@ server <- function(input, output,session) {
       values <- serie_simulee$x
       breakpoints <- result$breakpoints # recupere les points de ruptures de référence
       measure <- seq(1, input$N)
-      geom <- Data[Data$toponyme == "l'Isère", ]  # ne sert a rien mais obligatoire pour le code
+
+      data_query = DBI::sqlInterpolate(con, "SELECT * FROM network_metrics WHERE toponyme = ? ORDER BY measure", "l'Isère")
+      geom <- sf::st_read(dsn = con, query = data_query)
       geom <- geom$geom  # ne sert a rien mais obligatoire pour le code
     }
     
@@ -656,7 +662,9 @@ server <- function(input, output,session) {
       
       measure <- 1:length(values)
       breakpoints <- NULL
-      geom <- Data[Data$toponyme == "l'Isère", ]
+
+      data_query = DBI::sqlInterpolate(con, "SELECT * FROM network_metrics WHERE toponyme = ? ORDER BY measure", "l'Isère")
+      geom <- sf::st_read(dsn = con, query = data_query)
       geom <- geom$geom
     }
     
