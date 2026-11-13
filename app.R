@@ -213,7 +213,7 @@ con <- DBI::dbConnect(RPostgres::Postgres(),
                       password  = Sys.getenv("DBMAPDO_PASS"))
 
 
-query <- "SELECT * FROM network_metrics"
+query <- "SELECT * FROM network_metrics WHERE gid_region = 11"
 
 Data <- sf::st_read(dsn = con, query = query)
 
@@ -1128,9 +1128,25 @@ server <- function(input, output,session) {
   #   
   # })
   
+  # output$map <- renderLeaflet({
+  #   leaflet() %>%
+  #     addProviderTiles(providers$CartoDB.Positron) %>%
+  #     setView(lng = 2.2137, lat = 46.2276, zoom = 6)
+  # })
+  
   output$map <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles(providers$CartoDB.Positron) %>%
+      addTiles(
+        urlTemplate = paste0(
+          "https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=",
+          Sys.getenv("CARTO_API_KEY")
+        ),
+        attribution = '© CARTO',
+        options = tileOptions(
+          subdomains = "abcd",
+          maxZoom = 20
+        )
+      ) %>%
       setView(lng = 2.2137, lat = 46.2276, zoom = 6)
   })
   
@@ -1169,19 +1185,38 @@ server <- function(input, output,session) {
       }
       
       
+  #   } else {
+  #     leafletProxy("map") %>%
+  #       clearShapes() %>%
+  #       clearMarkers() %>%
+  #       addProviderTiles(providers$CartoDB.Positron) %>%
+  #       addPolylines(data = get_data_axis()$df, lng = ~x, lat = ~y)
+  #     
+  #     if (input$segment_button) {
+  #       leafletProxy("map") %>%
+  #         addCircleMarkers(data = get_data_axis()$breakpoint, lng = ~x, lat = ~y, radius = 5, color = "red")
+  #     }
+  #   }
+  # })
+      
     } else {
       leafletProxy("map") %>%
         clearShapes() %>%
         clearMarkers() %>%
-        addProviderTiles(providers$CartoDB.Positron) %>%
         addPolylines(data = get_data_axis()$df, lng = ~x, lat = ~y)
       
       if (input$segment_button) {
         leafletProxy("map") %>%
-          addCircleMarkers(data = get_data_axis()$breakpoint, lng = ~x, lat = ~y, radius = 5, color = "red")
-      }
-    }
-  })
+          addCircleMarkers(
+            data = get_data_axis()$breakpoint,
+            lng = ~x,
+            lat = ~y,
+            radius = 5,
+            color = "red"
+          )
+            }
+          }
+        })
   
   
   tableau_df1 <- reactive({
