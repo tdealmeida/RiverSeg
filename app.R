@@ -21,7 +21,7 @@ library(cumSeg)
 library(trend)
 library(bfast)
 
-
+# a
 
 ##### fonction #####
 # Fonction récursive pour PETTITT
